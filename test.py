@@ -1,5 +1,3 @@
-print("-"*15)
+import os 
+os.system('start opera 127.0.0.1:4000')
 
-print("---- THIS IS TEST OF JENKINS FROM GIT")
-
-print("-"*15)
