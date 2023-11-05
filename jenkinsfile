@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Open in browser"){
+            steps{
+                script{
+                    sh 'ls'
+                }
+            }
+        }
+        // STAGE PASSED
+        stage('Checkout GitHub') {
+            steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/esubalew-gosaye/devOps-2.git']])
+            }
+        }
+        // STAGE PASSED
+        //stage("Build Docker image"){
+        //    steps{
+        //        script{
+        //            sh 'docker build -t dev-djan-web .'
+        //        }
+        //    }
+        //}
+        /* STAGE PASSED
+        stage("Push image to DockerHub"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dokerhubpwd')]) {
+                       sh 'docker login -u mesaye -p ${dokerhubpwd}'   
+                       
+                       sh 'docker tag dev-djan-web mesaye/dev-djan-web:push-hub'
+                       
+                       sh 'docker push mesaye/dev-djan-web:push-hub'
+                    }
+                    
+                }
+            }
+        }
+        
+        stage("Run the Container"){
+            steps{
+                script{
+                    sh 'docker run -dp 4000:8000 dev-djan-web'
+                }
+            }
+        }
+        */
+    }
+}
